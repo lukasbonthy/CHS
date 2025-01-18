@@ -12,4 +12,4 @@ java -Xmx1024M -Xms1024M -jar bungee.jar &
 sleep 80
 
 # Run the confirm-code command for EaglerXBungee after Bungee has started
-java -jar /bungee/plugins/EaglerXBungee-1.2.6.jar confirm-code 1ac4e20429
+java -jar /bungee/plugins/EaglerXBungee-1.2.6.jar confirm-code 6f5480d69b
