@@ -1,34 +1,15 @@
 #!/bin/bash
+echo "starting..."
+cd bungee
 
-echo "Starting setup..."
+# Replace the placeholder in the config.yml file with the SERVER variable
+sed -i 's/${SERVER}/'"$SERVER"'/g' config.yml
 
-# Navigate to the bungee directory
-if ! cd bungee; then
-    echo "Error: Could not change to 'bungee' directory. Exiting."
-    exit 1
-fi
+# Start the Bungee server
+java -Xmx1024M -Xms1024M -jar bungee.jar &
 
-# Check if SERVER environment variable is set
-if [ -z "$SERVER" ]; then
-    echo "Error: SERVER environment variable is not set. Exiting."
-    exit 1
-fi
+# Wait for Bungee to start (adjust the sleep time as necessary)
+sleep 10
 
-# Replace placeholder in config.yml with the SERVER value
-if [ -f config.yml ]; then
-    sed -i "s/\${SERVER}/$SERVER/g" config.yml
-    echo "Updated config.yml with SERVER value: $SERVER"
-else
-    echo "Error: config.yml file not found. Exiting."
-    exit 1
-fi
-
-# Start the BungeeCord server
-echo "Starting BungeeCord server..."
-if java -Xmx1024M -Xms1024M -jar bungee.jar; then
-    echo "BungeeCord server started successfully."
-    echo "Confirm-code: 1ac4e20429"
-else
-    echo "Error: Failed to start BungeeCord server. Exiting."
-    exit 1
-fi
+# Run the confirm-code command for EaglerXBungee after Bungee has started
+java -jar /bungee/plugins/EaglerXBungee-1.2.6.jar confirm-code 1ac4e20429
